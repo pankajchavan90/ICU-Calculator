@@ -1,0 +1,20 @@
+
+<svg width="28px" height="15px" viewBox="0 0 28 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="ICU_Cal_Dieat-Plan" transform="translate(-22.000000, -309.000000)" stroke="#000000">
+            <g id="Group-5" transform="translate(0.000000, 285.000000)">
+                <g id="Bed-Icon" transform="translate(22.000000, 25.000000)">
+                    <path d="M1,0 L1,13" id="Path-2"></path>
+                    <path d="M27,4 L27,13" id="Path-2"></path>
+                    <path d="M3,7 L8,7" id="Path-3"></path>
+                    <path d="M1,9 L27,9" id="Path-3"></path>
+                    <path d="M10.378,3 L23.11,3 C24.1538182,3 25,3.84618182 25,4.88999999 L25,6.622 C25,6.83076364 24.8307636,7 24.622,7 L10.378,7 C10.1692364,7 10,6.83076364 10,6.622 L10,3.378 C10,3.16923636 10.1692364,3 10.378,3 Z" id="Rectangle"></path>
+                    <ellipse id="Oval" cx="5.88461538" cy="3.44736842" rx="1.73076923" ry="1.71052632"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

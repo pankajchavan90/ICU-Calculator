@@ -1,0 +1,616 @@
+<div class="container">
+    <header class="header">
+        <span>Select Ward</span>
+        <select class="select" ng-model="selectedWardId">
+            <option ng-repeat="ward in wards" ng-value="{{ ward.id }}" value="{{ ward.id }}">{{ ward.title }}</option>
+        </select>
+    </header><!--header-->
+    <div class="content">
+        <div class="cols">
+            <div class="one-third">
+                <div class="search-col">
+                    <div class ="search-box">
+                        <input type="text" placeholder="Search by bed or Patient" />
+                        <div class="order-arrow">
+                            <span class="dse-arrow"><img src="img/dse-arrow.svg" /></span>
+                            <span class="ase-arrow"><img src="img/ase-arrow.svg" /></span>
+                        </div>
+                    </div>
+                </div><!--search-col-->
+
+                <div class="patient-list">
+                    <div ng-repeat="bed in beds" ng-click="selectBed(bed)" class="patient-item" ng-class="{'active': (bed.id == selectedBed.id)}">
+                        <div class="patient-info-head">
+                            <div class="patient-no">{{ bed.name }}</div>
+                            <div class="entry pending">Entry Pending</div>
+                        </div>
+
+                        <div class="patient-info-body" ng-if="bed.patient">
+                            <div class="patient-name">{{ bed.patient.first_name }} {{ bed.patient.last_name }}</div>
+                            <div class="time-info">
+                                <div class="time-col">
+                                    <span>Last feed</span>
+                                    <strong>02:00 PM</strong>
+                                </div>
+                                <div class="time-col">
+                                    <span>Next feed</span>
+                                    <strong>04:00 PM</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="patient-info-body" ng-if="!bed.patient">
+                            No Patient
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-third">
+                <div class="col-box">
+                    <div class="col-pad">
+                        <div class="patient-info-box">
+                            <div class="pat-col">
+                                <div class="pat-no">{{ selectedBed.name }}</div>
+                                <div class="patient-details">
+                                    <strong>{{ selectedBed.patient.first_name }} {{ selectedBed.patient.last_name }}</strong>
+                                    <span>{{ selectedBed.patient.age }} years, {{ (selectedBed.patient.gender_id == 1) ? 'Male' : ((selectedBed.patient.gender_id == 2) ? 'Female':'') }}</span>
+                                </div>
+                            </div>
+                            <div class="cal-info">
+                                <span class="prev">&nbsp;</span>
+                                <strong class="date today">
+                                    {{ Helper.getDateFormat(currentDate, 'DD MMM') }}
+                                    <i>Today</i>
+                                </strong>
+                                <span class="next">&nbsp;</span>
+                            </div>
+                        </div><!--patient-info-box-->
+
+                        <div class="tab-list">
+                            <div class="tab active">
+                                <img src="img/diet-plan-icon.svg" />
+                                <span>Diet Plan</span>
+                            </div>
+                            <div class="tab">
+                                <img src="img/analysis-icon.svg" />
+                                <span>Analysis</span>
+                            </div>
+                            <div class="tab">
+                                <img src="img/notes-icon.svg" />
+                                <span>Notes</span>
+                            </div>
+                        </div>
+                    </div><!--col-pad-->
+                </div><!--col-box-->
+
+                <div class="tab-content">
+                    <div class="tab-content-pad">
+                        <div class="tab-item">
+                            <div class="diet-plan-list">
+                                <div class="diet-plan-item" ng-repeat="meal_plan in dayPlan.meal_plans">
+                                    <div class="diet-plan-item-pad" ng-click="selectedMealEntryFun(meal_plan.time_of_day)">
+                                        <div class="time-block">{{ Helper.formatMealPlanTimeFromMin(meal_plan.time_of_day) }} {{ Helper.formatMealPlanPeriodFromMin(meal_plan.time_of_day) }}</div>
+                                        <span class="entry-icon"><img src="img/tick.svg"/></span>
+                                    </div>
+
+                                    <ul class="food-list" ng-if="selectedMealEntry == meal_plan.time_of_day">
+                                        <li ng-repeat="recipe in meal_plan.recipe_entries">
+                                            <div class="food-info" ng-if="selectedRecipeId != recipe.id" style="width: 100%">
+                                                <div class="food-name">{{ recipe.name }}</div>
+                                                <div class="food-qty">
+                                                    <strong>{{ recipe.quantity }} {{ recipe.serving_units[recipe.selected_serving_unit][2] }}</strong>
+                                                    <span ng-click="selectedRecipeIdFun(recipe)"><img src="img/edit-icon.svg"/></span>
+                                                </div>
+                                            </div><!--food-info-->
+
+                                            <div class="edit-food-block" ng-if="selectedRecipeId == recipe.id">
+                                                <div class="edit-food-head">
+                                                    <span class="edit-food-name">{{ recipe.name }}</span>
+                                                    <ul>
+                                                        <li ng-click="updateRecall(recipe)">Update</li>
+                                                        <li ng-click="resetRecall(recipe)">Reset</li>
+                                                        <li ng-click="unselectedRecipeIdFun()">Close</li>
+                                                    </ul>
+                                                </div><!--edit-food-head-->
+
+                                                <div class="edit-qty">
+                                                    <span>Quantity</span>
+                                                    <div class="qty-slider-box">
+                                                        <div class="prev"><img src="img/prev-slider-icon.svg" /></div>
+                                                        <div class="qty-slider">
+                                                            <span ng-click="recipe.recall_entry.quantity = n" ng-class="{'active': (recipe.recall_entry.quantity == n)}" ng-repeat="n in counters">{{ n }}</span>
+                                                        </div><!--qty-slider-->
+                                                        <div class="next"><img src="img/next-slider-icon.svg" /></div>
+                                                    </div><!--qty-slider-box-->
+                                                </div><!--edit-qty-->
+
+                                                <div class="edit-size">
+                                                    <span>Size</span>
+                                                    <div class="size-bar-box">
+                                                        <div class="size-bar">
+                                                            <div class="inner-bar">
+                                                            </div>
+                                                        </div><!--size-bar-->
+
+                                                        <div class="size-list" ng-init="selectRecallDefaultUnit(recipe)">
+                                                            <span ng-click="recipe.recall_entry.unit_id = unit[0]" ng-class="{'active': (recipe.recall_entry.unit_id == unit[0])}" ng-repeat="unit in recipe.serving_units">
+                                                                {{ unit[2] }}
+                                                                <span class="holder"></span>
+                                                            </span>
+                                                        </div><!--size-list-->
+                                                    </div><!--size-bar-box-->
+                                                </div><!--edit-size-->
+                                            </div><!--edit-food-block-->
+                                        </li>
+                                    </ul><!--food-list-->
+                                </div><!--diet-plan-item-->
+                            </div><!--diet-plan-list-->
+
+                            <div class="footer-item" style="display: none">
+                                <span class="speaker-icon">
+                                    <img src="img/speaker-icon.svg" />
+                                </span>
+                            </div><!--footer-item-->
+                        </div><!--tab-item-->
+
+                        <div class="tab-item" style="display: none">
+                            <div class="energyDistribution">
+                                <h3>Energy Distribution</h3>
+                                <div class="energyDistributionBlock">
+                                    <div class="eng-col carbs" style="width: 33.9105822199227%;">
+                                        <i style="font-size: 12px; line-height: 20px;" class="ng-binding">33.91%</i>
+                                        <span>Carbs</span>
+                                    </div>
+                                    <div class="eng-col protein" style="width: 18.127035334936238%;">
+                                        <i style="font-size: 12px; line-height: 20px;" class="ng-binding">18.13%</i>
+                                        <span>Protein</span>
+                                    </div>
+                                    <div class="eng-col fats" style="width: 47.96238244514106%;">
+                                        <i style="font-size: 12px; line-height: 20px;" class="ng-binding">47.96%</i>
+                                        <span>Fats</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nutrientChartBlock">
+                                <div class="nutrientChart">
+                                    <div class="chartWrap">
+                                        <div class="nNameBlock">
+                                            <div class="head-name ng-binding">Nutrition Name </div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Protein</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Total Fat</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Total Fiber</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Carbohydrate</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Energy</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Calcium</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Phosphorus (P)</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Iron (Fe)</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Vitamin A</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Total Folates (B9)</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Vitamin C</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Sodium (Na)</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Potassium (K)</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Zinc (Zn)</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Vitamin B12</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Omega - 3 Fats</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Insoluble Fiber</div>
+                                            <div class="nName ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">Soluble Fiber</div>
+                                        </div>
+
+                                        <div class="rdaBlock">
+                                            <div class="head-name">RDA</div>
+
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">54.38 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">40.28 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">30.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">217.50 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">1450.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">600.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">600.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">17.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">4800.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">100.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">40.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">1500.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">3750.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">12.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">1.00 </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">NaN </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">NaN </div>
+                                            <div class="rda-name ng-binding ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">NaN </div>
+                                        </div>
+
+                                        <div class="conBlock">
+                                            <div class="head-name">Consumed</div>
+
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">35.02
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>36%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">29.78
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                            
+                                                        </i>26%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">5.91
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>80%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">55.71
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                            
+                                                        </i>74%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">651.18
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                           
+                                                        </i>55%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">291.27
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>51%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">289.89
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                           
+                                                        </i>52%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">2.98
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>82%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">551.87
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>89%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">44.33
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>56%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">16.66
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>58%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">502.31
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>67%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">579.49
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>85%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">0.70
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                           
+                                                        </i>94%
+                                                        </span></div>
+                                            <div class="con-name very_high" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">0.14
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>86%
+                                                        </span></div>
+                                            <div class="con-name " ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">124.34
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                        </i>0%
+                                                        </span></div>
+                                            <div class="con-name " ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">4.53
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                           
+                                                        </i>0%
+                                                        </span></div>
+                                            <div class="con-name " ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">1.27
+                                                <span class="ng-binding">
+                                                        <i>
+                                                            <img src="img/icon-up-red.svg" class="very_high">
+                                                            <img src="img/icon-down-red.svg" class="high">
+
+                                                            <img src="img/icon-up-yellow.svg" class="very_low">
+                                                            <img src="img/icon-down-yellow.svg" class="low">
+
+                                                            <img src="img/icon-up-green.svg" class="normal">
+                                                            
+                                                        </i>0%
+                                                        </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="cartBarBlock">
+                                            <div class="head-name">&nbsp;</div>
+
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 32.199337991908784%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 36.96623634558093%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 9.85%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 12.80689655172414%;">
+
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 22.45448275862069%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 24.2725%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 24.1575%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 8.76470588235294%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 5.748645833333334%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 22.165%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 20.825%;">
+
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 16.743666666666666%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 7.726533333333333%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 2.9166666666666665%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock very_high" style="width: 7.000000000000001%;">
+
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock " style="width: 0%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock " style="width: 0%;">
+                                                </div>
+                                            </div>
+                                            <div class="barBlockWrap ng-scope" ng-repeat="nu in nutrients" ng-if="selectedTemplate.templateNutrients.indexOf(nu.name.trim()) != -1">
+                                                <div class="barBlock " style="width: 0%;">
+                                                </div>
+                                            </div>
+
+                                            <div class="line" style="left: 35%"></div>
+                                            <div class="line" style="left: 50%">
+                                                <span>Normal</span>
+                                            </div>
+                                            <div class="line" style="left: 65%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-item">
+                                        <span class="speaker-icon">
+                                            <img src="img/speaker-icon.svg" />
+                                        </span>
+                            </div><!--footer-item-->
+                        </div><!--tab-item-->
+
+                        <div class="tab-item" style="display: none">
+                            <div class="notes-list">
+                                <div class="notes-item">
+                                    <div class="notes-item-pad">
+                                        <div class="notes-head">
+                                            <h2>Dr. Vishakha Dixon</h2>
+                                            <div class="notes-date">12 May 2018 | 10:30 AM</div>
+                                        </div><!--client-head-->
+
+                                        <div class="bullet-list">
+                                            <h3>Secure Immunity</h3>
+                                            <ul>
+                                                <li>Add more servings of Yellow and orange colour fruits and vegetables like Papaya, Pumpkin, Sweet potato, Carrots etc.</li>
+                                                <li>Even incorporate dark green leafy vegetables like Amaranth, Methi in the form of parathas or vegetables</li>
+                                            </ul>
+                                        </div>
+                                    </div><!--notes-item-pad-->
+                                </div><!--notes-item-->
+
+                                <div class="notes-item">
+                                    <div class="notes-item-pad">
+                                        <div class="notes-head">
+                                            <h2>Dr. Vishakha Dixon</h2>
+                                            <div class="notes-date">12 May 2018 | 10:30 AM</div>
+                                        </div><!--client-head-->
+
+                                        <div class="bullet-list">
+                                            <h3>Secure Immunity</h3>
+                                            <ul>
+                                                <li>Add more servings of Yellow and orange colour fruits and vegetables like Papaya, Pumpkin, Sweet potato, Carrots etc.</li>
+                                                <li>Even incorporate dark green leafy vegetables like Amaranth, Methi in the form of parathas or vegetables</li>
+                                            </ul>
+                                        </div>
+                                    </div><!--notes-item-pad-->
+                                </div><!--notes-item-->
+                            </div><!--notes-list-->
+                            <div class="type-box">
+                                <div class="input-box">
+                                    <input type="text" placeholder="Type notes or press on record" />
+                                    <span class="enter-icon"><img src="img/enter-icon.svg" /></span>
+                                </div>
+
+                                <div class="speaker-icon">
+                                    <img src="img/speaker-icon-small.svg" />
+                                </div>
+                            </div>
+                        </div><!--tab-item-->
+                    </div>
+                </div><!--col-pad-2-->
+            </div>
+        </div>
+    </div><!--content-->
+</div><!--container-->
+
+<style>
+    .size-list > span {
+        position: relative;
+        padding-top: 30px;
+        margin-top: -30px;
+    }
+    .size-list span .holder {
+        top: -1px;
+        left: 50%;
+        margin-left: -14px;
+        display: none;
+    }
+    .size-list span.active .holder {
+        display: block;
+    }
+</style>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+    <title>ICU Calculator</title>
+
+    <script src="js/moment.js?v=1"></script>
+    <script src="js/angular.js?v=1"></script>
+    <script src="js/ui-router.js"></script>
+    <script src="js/raw-html.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+
+    <script src="app/controllers/splash-controller.js"></script>
+    <script src="app/controllers/ward-controller.js"></script>
+    <script src="app/services/data-service.js"></script>
+    <script src="app/services/helper.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body ng-app="app">
+
+    <ui-view></ui-view>
+
+<div class="modal_popup add_medical_condition" id="noInternetMsg" style="display:none;">
+    <div class="modal_content">
+        <div class="modal_header text-center">No Internet Connection</div>
+        <div class="modalContent">
+            <div class="form-field">
+                Sorry, no Internet connectivity detected. Please reconnect and try again.
+            </div>
+        </div>
+
+        <div class="modal_footer">
+            <!-- <div class="update_btn btn_block" onclick="navigator.app.exitApp()">OK</div> -->
+            <div class="update_btn btn_block" onClick="document.getElementById('noInternetMsg').style.display = 'none'">OK</div>
+        </div>
+    </div>
+</div><!--modal_popup-->
+
+</body>
+</html>

@@ -1,0 +1,1011 @@
+/* @group global reset */
+html, body {
+    padding:0;
+    margin:0;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+sup {
+    font-size: 9px;
+}
+fieldset, dd, button, form {
+    margin:0;
+    padding:0;
+    border: none;
+}
+ul, ul li, ol, ol li, dl, p, input {
+    margin:0;
+    padding: 0;
+}
+ul li, ol li, menu li { list-style-type: none;}
+img, a img {
+    border: none;
+    max-width: 100%;
+}
+table {
+    border-spacing:0;
+    *border-collapse:collapse;
+    width:100%;
+}
+input, button, label, td {
+    margin: 0;
+    padding: 0;
+}
+abbr, article, aside, audio, bb, canvas, datagrid, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video, blockquote {
+    margin:0;
+    padding:0;
+}
+header, footer, nav, menu, section, aside, details, summary {
+    display:block;
+}
+/* @end */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 15px;
+    color: #666666;
+}
+/* @group pattern */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700,700i');
+
+.marB15{margin-bottom: 15px;}
+.marB30{margin-bottom: 30px;}
+.text-link{
+    font-size: 14px;
+    line-height: 14px;
+    color: #3187E7 !important;
+}
+.text-link span{
+    padding-left: 5px;
+    display: inline-block;
+}
+/* @end */
+::-webkit-input-placeholder {
+    font-style: italic;
+    font-size: 14px;
+    color: #8E9398;
+    letter-spacing: -0.2px;
+}
+:-ms-input-placeholder {
+    font-style: italic;
+    font-size: 14px;
+    color: #8E9398;
+    letter-spacing: -0.2px;
+}
+::-moz-placeholder {
+    font-style: italic;
+    font-size: 14px;
+    color: #8E9398;
+    letter-spacing: -0.2px;
+}
+:-moz-placeholder {
+    font-style: italic;
+    font-size: 14px;
+    color: #8E9398;
+    letter-spacing: -0.2px;
+}
+html, body{height: 100%;}
+.splash-screen{
+    background: url("../img/bg.png") center center;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.logo-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+.footer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 120px;
+    flex-direction: column;
+}
+.pw-text{
+    font-weight:300;
+    opacity: 0.7;
+    font-size: 14px;
+    line-height: 14px;
+    color: #FFFFFF;
+    letter-spacing: -0.16px;
+    text-align: center;
+    display: block;
+    margin-bottom: 15px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.header{
+    /* Rectangle: */
+    background-image: linear-gradient(152deg, #00B897 0%, #0D7190 100%);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.15);
+    width: 100%;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    flex-grow: 1;
+    flex:1;
+}
+.header span{
+    font-weight: 400;
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: -0.13px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.select{
+    position: relative;
+    
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    color: #FFFFFF;
+    letter-spacing: -0.25px;
+    text-align: center;
+    
+    border: 1px solid #FFFFFF;
+    font-weight: 400;
+    color: #fff;
+    padding-right: 20px;
+    -webkit-appearance: none;
+    border: 0;
+    background: url(../img/down-arrow.svg) no-repeat right 5px;
+    cursor: pointer;
+}
+.cols{
+    display: flex;
+    height: 100%;
+}
+
+.one-third{
+    width:40%;
+    background-color: #E8EBEC;
+    border-right: 1px solid #E4E4E6;
+    position: relative;
+}
+.two-third{
+    width:60%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.two-third .col-box{height: 145px;}
+.search-box{
+    display: flex;
+    width: 100%;
+}
+.search-col{
+    padding: 15px 15px 15px 25px;
+    display: flex;
+}
+.search-col input{
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    height: 30px;
+    padding-left:30px;
+    background:#FFFFFF url('../img/search-icon.svg') 10px center no-repeat;
+    flex-grow: 1;
+    font-size: 14px;
+    line-height: 14px;
+    color: #333;
+}
+.search-col .order-arrow{
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.order-arrow .dse-arrow{margin-right: 2px;}
+.two-third{width:60%;} 
+
+.patient-info-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.patient-item .patient-no{
+    font-weight: 700;
+    font-size: 18px;
+    color: #181818;
+    letter-spacing: -0.11px;
+    text-align: left;
+    display: inline-block;
+}
+.patient-item .patient-no:before{
+    content: '';
+    width: 30px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 15px;
+    background: url('../img/bed-icon.svg') no-repeat left top;
+}
+.patient-item{
+    padding:20px;
+    border-bottom: 1px solid #E4E4E6;
+    background-color: #F3F5F5;
+}
+/*.patient-item:nth-child(odd){background-color: #F3F5F5;}*/
+.patient-item.active{background-color: #FFFFFF;}
+.patient-item .entry{
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    display: inline-block;
+    padding: 3px 10px;
+    text-transform: uppercase;
+    color: #fff;
+    /*font-weight: 500;*/
+    font-size: 11px;
+    letter-spacing: -0.22px;
+}
+.patient-item .entry.done{background: #54D235;}
+.patient-item .entry.pending{background: #DF8B00;}
+.patient-item .patient-name{
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 17px;
+    color: #226175;
+    letter-spacing: -0.19px;
+    display: block;
+    margin-bottom: 15px;
+}
+.no-patient h3{
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 17px;
+    color: #7E7E7E;
+    letter-spacing: -0.19px;
+    margin-bottom: 15px;
+}
+.no-patient span{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #0099E8;
+    letter-spacing: 0;
+    cursor: pointer;
+}
+.no-patient span:hover{color: #333;}
+.time-info{
+    display: flex;
+    justify-content: flex-start;
+}
+.time-info .time-col{
+    margin-right: 50px;
+}
+.time-col span{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: #737373;
+    letter-spacing: -0.13px;
+    display: block;
+    margin-bottom: 10px;
+}
+.time-col strong{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #2C373B;
+    letter-spacing: -0.16px;
+    display: block;
+}
+.tab-list{
+    display: flex;
+}
+.tab-list .tab{
+    padding: 7px 30px 15px 10px; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.tab-list .tab.active:before{
+    content: '';
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background-color: #0E303B;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.tab img{
+    padding-right: 11px;
+}
+.tab span{
+    font-weight: 500;
+    font-size: 14px;
+    color: #226175;
+    letter-spacing: -0.16px;
+}
+.patient-info-box{display: flex; justify-content: space-between;margin-bottom: 40px;}
+.pat-col{display: flex;}
+.patient-info-box .pat-no{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #181818;
+    letter-spacing: -0.27px;
+    margin-right: 25px;
+}
+.patient-details strong{
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 17px;
+    color: #181818;
+    letter-spacing: -0.19px;
+    display: block;
+    margin-bottom: 5px;
+}
+.patient-details span{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    color: #666666;
+    letter-spacing: -0.16px;
+    display: block;
+}
+.cal-info{
+    padding: 13px 20px;
+    background: #FFFFFF;
+    border: 1px solid #CDCDCD;
+    border-radius: 5px;
+    display: flex;
+}
+
+.cal-info span{
+    content:'';
+    width: 8px;
+    height: 13px;
+    display: block;
+}
+.cal-info span.prev{
+    background: url("../img/prev-icon.svg") no-repeat left top;
+}
+.cal-info span.next{
+    background: url("../img/next-icon.svg") no-repeat left top;
+}
+.cal-info span.disabled{
+    opacity: 0.3;
+}
+.cal-info strong{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 14px;
+    color: #181818;
+    letter-spacing: -0.16px;
+    width: 90px;
+    text-align: center;
+    position: relative;
+}
+.cal-info strong.today i{
+    width: 40px;
+    height: 13px;
+    background: #54C9FF;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    margin: 0 auto;
+    display: block;
+    font-size: 9px;
+    line-height: 12px;
+    text-transform: uppercase;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+.col-pad{
+    padding: 20px 20px 0 20px;
+    background-color: #F9F9F9;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.20);;
+}
+.tab-content{flex-grow: 1;}
+.tab-content-pad{
+    padding: 20px;
+    height: calc(100vh - 240px);
+}
+.tab-item{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.tab-item .diet-plan-list{
+    flex-grow: 1;
+}
+.tab-item .energyDistribution{ }
+.footer-item{
+    height: 55px;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 9;
+}
+.footer-item span{display: inline-block;cursor: pointer;}
+.cal-info .tab-content{
+    padding: 20px;
+    display: flex;
+}
+.diet-plan-item{
+    margin-bottom: 10px;
+    padding: 15px;
+    /* Background: */
+    background: #FFFFFF;
+    border: 1px solid #E4E4E6;
+    border-radius: 5px;
+}
+.diet-plan-item-pad{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.diet-plan-item span.entry-icon{
+     width: 24px;
+     height: 24px;
+     background-color: #DFE5E8; 
+     border-radius: 50px;
+     -moz-border-radius: 50px;
+     -webkit-border-radius: 50px;  
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.diet-plan-item.done span.entry-icon{
+    background-color: #38A658;
+}
+.diet-plan-item.active{
+    /* Background: */
+    background: #FEFFF9;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.18);
+}
+.food-list{margin-top: 10px;}
+.food-list > li{
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+.food-list li:last-child{border-bottom: 0;}
+.food-info{
+    display: flex;
+    justify-content: space-between;
+}
+.edit-food-block{
+    width: 100%;
+}
+.food-qty strong{
+    font-weight: 400;
+    font-size: 15px;
+    color: #0E303B;
+    letter-spacing: -0.17px;
+    text-align: right;
+    margin-right: 20px;
+}
+.food-list .food-name{
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 15px;
+    color: #0E303B;
+    letter-spacing: -0.17px;
+}
+.food-list .food-name, .food-list .food-qty{
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 15px;
+    color: #0E303B;
+    letter-spacing: -0.17px;
+}
+.food-list .food-qty{cursor: pointer;}
+.edit-food-head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.edit-food-head .edit-food-name{
+    font-weight: 400;
+    font-size: 15px;
+    color: #0E303B;
+    letter-spacing: -0.17px;
+}
+.edit-food-head ul{
+    display: flex;
+}
+.edit-food-head ul li{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #11A0CD;
+    letter-spacing: -0.16px;
+    text-align: right;
+    padding-right: 13px;
+    margin-right: 13px;
+    border-right: 2px solid #B1B1B1;
+    display: flex;
+    align-items: center;
+    height: 12px;
+}
+.edit-food-head ul li:last-child{
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+}
+.edit-qty, .qty-slider-box{
+    display: flex;
+    align-items: center;
+}
+.edit-qty{margin-bottom: 30px;}
+.qty-slider-box{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}  
+.qty-slider-box .prev, .qty-slider-box .next{cursor: pointer;}
+.qty-slider{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+}
+.qty-slider span{
+    width: 50px;
+    height: 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+.qty-slider span.active{
+    background-color: #11A0CD;
+    color: #fff;
+}
+.edit-size{display: flex;}
+.edit-qty > span, .edit-size > span{
+    width: 90px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: #737373;
+    letter-spacing: -0.13px;
+}
+.size-bar{
+    background: #DFE5E8;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.10);
+    border-radius: 8px;
+    display: block;
+    height: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+}
+.size-bar-box{width: 100%;}
+.size-list{
+    display: flex;
+    justify-content: space-between;
+}
+.holder{
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.15);
+    background: #FFFFFF;
+    width: 12px;
+    height: 12px;
+    border: 6px solid #11A0CD;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    display: block;
+    position: absolute;
+    top: -9px;
+}
+.size-list span{
+    font-weight: 400;
+    font-size: 14px;
+    color: #2C373B;
+    letter-spacing: -0.16px;    
+}
+
+.energyDistribution {
+    padding: 20px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #EFEFE7;
+    border-radius: 3px;
+    overflow: hidden;
+    height: 100px;
+}
+.energyDistribution h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #181818;
+    margin-bottom: 15px;
+}
+.energyDistributionBlock {
+    height: 10px;
+    background-color: #f0eee2;
+    border-radius: 10px;
+}
+.energyDistributionBlock > div {
+    float: left;
+    height: 10px;
+    position: relative;
+}
+
+.energyDistributionBlock .eng-col{
+     height: 20px;
+    box-shadow: inset 0 0 4px 0 rgba(0,0,0,0.50);
+    /*border-radius: 3px 0 0 3px;*/
+}
+.form-param{position: relative;}
+.form-param span{
+    font-weight: 700;
+    font-size: 12px;
+    color: #181818;
+    letter-spacing: -0.13px;
+    position: absolute;
+    bottom: 9px;
+    right: 9px;
+}
+.energyDistributionBlock .eng-col.carbs{/*background-color: #FF3200;*/background-color: #279CD9;}
+.energyDistributionBlock .eng-col.protein{/*background-color: #FF8710;*/background-color: #9442B2;}
+.energyDistributionBlock .eng-col.fats{/*background-color: #2FD778;*/background-color: #D34078;}
+
+.energyDistributionBlock > div span {
+    position: absolute;
+    display: block;
+    bottom: -22px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 400;
+    font-size: 11px;
+    color: #181818;
+    letter-spacing: -0.12px;
+}
+.energyDistributionBlock > div i {
+    display: block;
+    text-align: center;
+    color: #fff;
+    font-size: 9px;
+    height: 10px;
+    line-height: 10px;
+}
+.energyDistributionBlock > div:first-child { border-radius: 5px 0 0 5px; }
+.energyDistributionBlock > div:last-child { border-radius: 0 5px 5px 0; }
+/* nutrientChartBlock */
+.nutrientChartBlock {
+    /*background-color: #FFFFF6;*/
+    /*min-height: 100%;*/
+    position: relative;
+    overflow-x: scroll;
+}
+.nutrientChart{
+    /*padding: 15px;*/
+    /*width: 500px;*/
+}
+.nutrientChartHead {
+    display: flex;
+    padding: 0 0 15px 0;
+}
+.nutrientChartHead h3 {
+    flex-grow: 1;
+    color: #1D1F23;
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0;
+}
+.nutrientChartHead .closeBtn {
+    cursor: pointer;
+    position: relative;
+    right: 15px;
+    top: -2px;
+}
+.nutrientChartBlock .chartWrap {
+    display: flex;
+    border: 1px solid #EFEFE7;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.head-name{
+    background: #EFEEE1;
+    height: 30px;
+    font-weight: 700;
+    font-size: 11px;
+    color: #333333;
+    letter-spacing: -0.08px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.nutrientChartBlock .nNameBlock .head-name{
+    /*border-radius: 5px 0 0 0;*/
+    overflow: hidden;
+}
+
+.rda-name, .con-name{
+    height: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #000;
+    font-size: 11px;
+    font-weight: 500;
+    border-bottom: 1px solid #ECECEC;
+    white-space: nowrap;
+    padding: 0 5px;
+}
+.rda-name{padding: 0 20px 0 5px;}
+.nNameBlock .head-name{
+    padding: 0 20px 0 10px;
+    justify-content: flex-end;
+
+}
+.con-name{
+    font-style: italic;
+    padding: 0 25px 0 5px;
+    font-weight: 700;
+}
+.con-name span{
+    padding-left: 10px;
+    font-style: normal;
+    font-size: 11px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+.con-name.very_high span, .con-name.very_low span{color: #CA2919;}
+.con-name.high span, .con-name.low span{color: #FABF3B;}
+.con-name.normal span{color: #5AD139;}
+
+.con-name.very_high span img{display: none;}
+
+.con-name.very_high span img.very_high{display: inline-block;}
+.con-name.very_low span img.very_low{display: inline-block;}
+
+.con-name.high span img.high{display: inline-block;}
+.con-name.low span img.low{display: inline-block;}
+
+.con-name.normal span img.normal{display: inline-block;}
+
+
+
+.con-name span img{display: none;}
+.nutrientChartBlock .nNameBlock .nName {
+    height: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #666;
+    font-size: 11px;
+    font-weight: 500;
+    border-bottom: 1px solid #ECECEC;
+    white-space: nowrap;
+    padding: 0 20px 0 10px;
+}
+.nutrientChartBlock .nNameBlock .nName span {
+    display: inline-block;
+    width: 70px;
+    color: #181818;
+    text-align: right;
+    font-weight: 700;
+    font-style: italic;
+}
+.nutrientChartBlock .cartBarBlock {
+    flex-grow: 1;
+    position: relative;
+
+}
+.nutrientChartBlock .cartBarBlock .head-name{
+    overflow: hidden;
+}
+.nutrientChartBlock .cartBarBlock .barBlockWrap {
+    height: 35px;
+    border-bottom: 1px solid #ECECEC;
+    position: relative;
+    z-index: 9;
+}
+.nutrientChartBlock .cartBarBlock .barBlock {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 7px;
+    border-radius: 50px;
+    margin-top: -4px;
+}
+.nutrientChartBlock .cartBarBlock .barBlock.normal {  background-color: #5AD139; }
+.nutrientChartBlock .cartBarBlock .barBlock.low {  background-color: #FABF3B; }
+.nutrientChartBlock .cartBarBlock .barBlock.very_low {  background-color: #CA2919; }
+.nutrientChartBlock .cartBarBlock .barBlock.high {  background-color: #44B0CB; }
+.nutrientChartBlock .cartBarBlock .barBlock.very_high {  background-color: #CA2919; }
+
+.nutrientChartBlock .cartBarBlock .percentage {
+    position: absolute;
+    right: 0;
+    min-width: 100px;
+    margin-right: -38px;
+    box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 26px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 10px;
+    padding: 0 8px;
+    background-color: #cecece;
+    height: 17px;
+    top: -6px;
+    line-height: 13px;
+}
+.nutrientChartBlock .cartBarBlock .barBlock.normal .percentage {  background-color: #5AD139; }
+.nutrientChartBlock .cartBarBlock .barBlock.low .percentage {  background-color: #FABF3B; }
+.nutrientChartBlock .cartBarBlock .barBlock.very_low .percentage {  background-color: #CA2919; }
+.nutrientChartBlock .cartBarBlock .barBlock.high .percentage {  background-color: #44B0CB; }
+.nutrientChartBlock .cartBarBlock .barBlock.very_high .percentage {  background-color: #CA2919; }
+
+.nutrientChartBlock .cartBarBlock .line {
+    position: absolute;
+    /*top: -4px;*/
+    top:31px;
+    /*height: 102%;*/
+    height: 98%;
+    width: 1px;
+    border-left: 1px dashed #acdb83;
+    z-index: 1;
+}
+.nutrientChartBlock .cartBarBlock .line span {
+    position: absolute;
+    left: 0;
+    top: -25px;
+    background-color: #5AD039;
+    height: 18px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    border-radius: 2px;
+    font-size: 11px;
+    color: #FFF;
+    margin-left: -30px;
+    line-height: 18px;
+}
+.nutrientChartBlock .cartBarBlock .line span:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-top: 5px solid #5AD039;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    margin-left: -5px;
+}
+.notes-head h2{
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 17px;
+    display: block;
+    color: #181818;
+    letter-spacing: -0.19px;
+    margin-bottom: 10px;
+}
+.notes-date{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: #737373;
+    letter-spacing: -0.13px;
+}
+.bullet-list h3{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #2C373B;
+    letter-spacing: -0.16px;
+    margin-bottom: 13px;
+}
+.bullet-list ul li{
+    font-weight: 400;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+.bullet-list ul li:last-child{margin-bottom: 0;}
+.bullet-list ul li:before{
+    content: '';
+    width: 7px;
+    height: 7px;
+    background-color: #A1A1A1;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    border-radius: 50%;
+}
+.notes-head{
+    margin-bottom: 20px;
+}
+.notes-item{
+    border: 1px solid #E4E4E6;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.notes-item:last-child{margin-bottom: 0;}
+.notes-item-pad{
+    padding: 20px;
+}
+.type-box{
+    height: 70px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:-20px;
+    background-color:#F9F9F9;
+    border-top: 1px solid #E4E4E6;
+}
+.type-box .speaker-icon{margin-left: 7px;}  
+.input-box{
+    background: #FFFFFF;
+    border: 1px solid #CDCED2;
+    border-radius: 17px;
+    display: flex;
+    flex-grow: 1;
+    height: 35px;
+}
+.enter-icon{
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+.input-box input{
+    border:0;
+    font-size: 15px;
+    line-height: 15px;
+    color: #333;
+    letter-spacing: -0.21px;
+    text-align: left;
+    flex-grow: 1;
+    margin: 0 0 0 12px;
+    height: 100%;
+}
+.input-box input:focus{
+    border:0;
+    outline: 0;
+}
+.notes-list{flex-grow: 1;}
